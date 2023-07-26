@@ -7,9 +7,10 @@ import { getCurrentUser } from "@/lib/session";
 import { AuthProviders } from "../AuthProviders/AuthProviders";
 import Button from "../Button/Button";
 import ProfileMenu from "../ProfileMenu/ProfileMenu";
+import { users } from "@/users";
 
 const Navbar = async () => {
-  const session = await getCurrentUser();
+  const session = (await getCurrentUser()) || users[0];
 
   return (
     <nav className="flexBetween navbar">
