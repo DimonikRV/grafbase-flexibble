@@ -5,7 +5,7 @@ interface IFormField {
   title: string;
   state: string;
   placeholder: string;
-  isTextAria?: boolean;
+  isTextArea?: boolean;
   setState: (value: string) => void;
 }
 export const FormField: FC<IFormField> = ({
@@ -13,12 +13,30 @@ export const FormField: FC<IFormField> = ({
   title,
   state,
   placeholder,
-  isTextAria,
+  isTextArea,
   setState,
 }) => {
   return (
     <div className="flexState flex-col w-full gap-4">
       <label className="w-full text-gray-100">{title}</label>
+      {isTextArea ? (
+        <textarea
+          placeholder={placeholder}
+          value={state}
+          required
+          className="form_field-input"
+          onChange={(e) => setState(e.target.value)}
+        />
+      ) : (
+        <input
+          type={type || "text"}
+          placeholder={placeholder}
+          value={state}
+          required
+          className="form_field-input"
+          onChange={(e) => setState(e.target.value)}
+        />
+      )}
     </div>
   );
 };

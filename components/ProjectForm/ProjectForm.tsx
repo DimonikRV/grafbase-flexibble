@@ -1,24 +1,63 @@
 "use client";
 
-import { ChangeEvent, FC, FormEvent } from "react";
-import { SessionInterface } from "@/common.types";
+import { useState, ChangeEvent, FC, FormEvent } from "react";
+import { SessionInterface, FormState } from "@/common.types";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { FormField } from "../FormField/FormField";
+import { categoryFilters } from "@/constant";
+import { CustomMenu } from "../CustomMenu/CustomMenu";
+import Button from "../Button/Button";
+import { createNewProject, fetchToken } from "@/lib/actions";
 
-interface IProjectForm {
+interface IProjectFormProps {
   type: string;
   session: SessionInterface;
 }
 
-export const ProjectForm: FC<IProjectForm> = ({ type, session }) => {
-  const handleFormSubmit = (e: FormEvent) => {};
-  const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {};
-  const handleStateChange = (fieldName: string, value: string) => {};
+export const ProjectForm: FC<IProjectFormProps> = ({ type, session }) => {
+  const router = useRouter();
+  const handleFormSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    const { token } = await fetchToken();
+    try {
+      if (type === "create") {
+        await createNewProject(form, session?.user?.id, token);
+        router.push("/");
+      }
+    } catch (error) {
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+  const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!file.type.includes("image")) {
+      return alert("Please upload an image file");
+    }
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      const result = reader.result as string;
+      handleStateChange("image", result);
+    };
+  };
+  const handleStateChange = (fieldName: string, value: string) => {
+    setForm((prevState) => ({ ...prevState, [fieldName]: value }));
+  };
 
-  const form = {
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [form, setForm] = useState<FormState>({
     image: "",
     title: "",
-  };
+    description: "",
+    liveSiteUrl: "",
+    githubUrl: "",
+    category: "",
+  });
 
   return (
     <form className={"flexStart form"} onSubmit={handleFormSubmit}>
@@ -37,8 +76,6 @@ export const ProjectForm: FC<IProjectForm> = ({ type, session }) => {
         {form.image && (
           <Image
             src={form?.image}
-            width={20}
-            height={20}
             className="sm:p-10 object-contain z-20"
             alt="Project poster"
             fill
@@ -51,6 +88,40 @@ export const ProjectForm: FC<IProjectForm> = ({ type, session }) => {
         placeholder="Flexibble"
         setState={(value) => handleStateChange("title", value)}
       />
+      <FormField
+        title="Description"
+        state={form.description}
+        placeholder="Showcase and discover remarkable developer projects."
+        setState={(value) => handleStateChange("description", value)}
+      />
+      <FormField
+        type="url"
+        title="Website URL"
+        state={form.liveSiteUrl}
+        placeholder="https://jsmastery.pro"
+        setState={(value) => handleStateChange("liveSiteUrl", value)}
+      />
+      <FormField
+        type="url"
+        title="GitHub URL"
+        state={form.githubUrl}
+        placeholder="https://github.com/dimonikr"
+        setState={(value) => handleStateChange("githubUrl", value)}
+      />
+      <CustomMenu
+        title="Category"
+        state={form.category}
+        filters={categoryFilters}
+        setState={(value) => handleStateChange("category", value)}
+      />
+      <div className="flexStart w-full">
+        <Button
+          title={isSubmitting ? "Creating" : "Create"}
+          type="submit"
+          leftIcon={isSubmitting ? "" : "/plus.svg"}
+          isSubmitting={isSubmitting}
+        ></Button>
+      </div>
     </form>
   );
 };

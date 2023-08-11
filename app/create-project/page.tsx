@@ -2,9 +2,10 @@ import { redirect } from "next/navigation";
 import { ProjectModal } from "@/components/Modal/ProjectModal";
 import { ProjectForm } from "@/components/ProjectForm/ProjectForm";
 import { getCurrentUser } from "@/lib/session";
+import { users } from "@/users";
 
 const CreateProject = async () => {
-  const session = await getCurrentUser();
+  const session = (await getCurrentUser()) || users[0];
 
   if (!session?.user) {
     redirect("/");

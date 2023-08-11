@@ -29,7 +29,11 @@ export const AuthProviders = () => {
     return (
       <div>
         {Object.values(providers).map((provider: Provider) => (
-          <button key={provider.id} onClick={() => signIn(provider?.id)}>
+          <button
+            className="px-2"
+            key={provider.id}
+            onClick={() => signIn(provider?.id)}
+          >
             {provider.id}
           </button>
         ))}

@@ -1,18 +1,37 @@
 import { getServerSession } from "next-auth/next";
 import { NextAuthOptions, User } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import Credentials from "next-auth/providers/credentials";
 import jsonwebtoken from "jsonwebtoken";
 import { JWT } from "next-auth/jwt";
 import { SessionInterface, UserProfile } from "@/common.types";
 import { createUser, getUser } from "./actions";
-// import { redirect } from "next/navigation";
-// import { AdapterUser } from "next-auth/adapters";
+import { users } from "../users/index";
 
 export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+    Credentials({
+      credentials: {
+        email: { label: "email", type: "email", required: true },
+        password: { label: "password", type: "password", required: "true" },
+      },
+      async authorize(credentials) {
+        if (!credentials?.email || !credentials.password) return null;
+        const currentUser = users.find(
+          (user) => user.user.email === credentials.email
+        );
+        if (currentUser && currentUser.user.password === credentials.password) {
+          const {
+            user: { password, ...userWithoutPass },
+          } = currentUser;
+          return userWithoutPass as User;
+        }
+        return null;
+      },
     }),
   ],
   jwt: {
@@ -60,6 +79,7 @@ export const authOptions: NextAuthOptions = {
         const userExists = (await getUser(user?.email as string)) as {
           user?: UserProfile;
         };
+
         if (!userExists.user) {
           await createUser(
             user.name as string,
