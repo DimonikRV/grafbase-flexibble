@@ -1,22 +1,22 @@
 "use client";
 
+import { FC } from "react";
 import { useRouter } from "next/navigation";
-
 import Button from "../Button/Button";
 
-type Props = {
+interface ILoadMore {
   startCursor: string;
   endCursor: string;
   hasPreviousPage: boolean;
   hasNextPage: boolean;
-};
+}
 
-const LoadMore = ({
+const LoadMore: FC<ILoadMore> = ({
   startCursor,
   endCursor,
   hasPreviousPage,
   hasNextPage,
-}: Props) => {
+}) => {
   const router = useRouter();
 
   const handleNavigation = (type: string) => {

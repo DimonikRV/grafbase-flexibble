@@ -92,3 +92,11 @@ export const footerLinks = [
     ],
   },
 ];
+
+export const buttonTitle = {
+  create: "CREATE",
+  edit: "EDIT",
+  creating: "CREATING",
+  editing: "EDITING",
+};
+

@@ -2,6 +2,7 @@
 
 import { useCallback, useRef, memo, ReactNode } from "react";
 import { useRouter } from "next/navigation";
+import close from "../../public/close.svg";
 import Image from "next/image";
 
 export const ProjectModal = memo(function ProjectModal({
@@ -37,7 +38,7 @@ export const ProjectModal = memo(function ProjectModal({
         onClick={onDismiss}
         className="absolute top-4 right-8"
       >
-        <Image src="./close.svg" width={17} height={17} alt="close" />
+        <Image src={close} width={17} height={17} alt="close" />
       </button>
       <div ref={wrapper} className="modal_wrapper">
         {children}

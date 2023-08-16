@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { getProviders, signIn } from "next-auth/react";
+import Button from "../Button/Button";
 
 interface Provider {
   id: string;
@@ -28,15 +29,15 @@ export const AuthProviders = () => {
   if (providers) {
     return (
       <div>
-        {Object.values(providers).map((provider: Provider) => (
-          <button
-            className="px-2"
-            key={provider.id}
-            onClick={() => signIn(provider?.id)}
-          >
-            {provider.id}
-          </button>
-        ))}
+        {Object.values(providers)
+          .filter((provider) => provider?.id === "credentials")
+          .map((provider: Provider) => (
+            <Button
+              title="Sign In"
+              key={provider.id}
+              handleClick={() => signIn(provider?.id)}
+            />
+          ))}
       </div>
     );
   } else {

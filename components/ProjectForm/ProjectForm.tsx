@@ -1,29 +1,41 @@
 "use client";
 
 import { useState, ChangeEvent, FC, FormEvent } from "react";
-import { SessionInterface, FormState } from "@/common.types";
+import { SessionInterface, FormState, ProjectInterface } from "@/common.types";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { FormField } from "../FormField/FormField";
-import { categoryFilters } from "@/constant";
+import { categoryFilters, buttonTitle } from "@/constant";
 import { CustomMenu } from "../CustomMenu/CustomMenu";
 import Button from "../Button/Button";
-import { createNewProject, fetchToken } from "@/lib/actions";
+import { createNewProject, fetchToken, updateProject } from "@/lib/actions";
+import { getTitleBtn } from "@/utils";
 
 interface IProjectFormProps {
   type: string;
   session: SessionInterface;
+  project?: ProjectInterface;
 }
 
-export const ProjectForm: FC<IProjectFormProps> = ({ type, session }) => {
+export const ProjectForm: FC<IProjectFormProps> = ({
+  type,
+  session,
+  project,
+}) => {
   const router = useRouter();
+
   const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     const { token } = await fetchToken();
     try {
-      if (type === "create") {
+      if (type === buttonTitle.create) {
         await createNewProject(form, session?.user?.id, token);
+        router.push("/");
+      }
+
+      if (type === buttonTitle.edit) {
+        await updateProject(form, project?.id as string, token);
         router.push("/");
       }
     } catch (error) {
@@ -51,14 +63,18 @@ export const ProjectForm: FC<IProjectFormProps> = ({ type, session }) => {
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [form, setForm] = useState<FormState>({
-    image: "",
-    title: "",
-    description: "",
-    liveSiteUrl: "",
-    githubUrl: "",
-    category: "",
+    image: project?.image || "",
+    title: project?.title || "",
+    description: project?.description || "",
+    liveSiteUrl: project?.liveSiteUrl || "",
+    githubUrl: project?.githubUrl || "",
+    category: project?.category || "",
   });
 
+  const titleBtn = getTitleBtn(isSubmitting, type);
+  if (!titleBtn) {
+    return null;
+  }
   return (
     <form className={"flexStart form"} onSubmit={handleFormSubmit}>
       <div className="flexStart form_image-container">
@@ -69,7 +85,7 @@ export const ProjectForm: FC<IProjectFormProps> = ({ type, session }) => {
           id="image"
           type="file"
           accept="image/*"
-          required={type === "create"}
+          required={type === "CREATE"}
           className="form_image-input"
           onChange={handleChangeImage}
         />
@@ -116,7 +132,7 @@ export const ProjectForm: FC<IProjectFormProps> = ({ type, session }) => {
       />
       <div className="flexStart w-full">
         <Button
-          title={isSubmitting ? "Creating" : "Create"}
+          title={titleBtn}
           type="submit"
           leftIcon={isSubmitting ? "" : "/plus.svg"}
           isSubmitting={isSubmitting}

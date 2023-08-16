@@ -35,7 +35,7 @@ const Button = ({
     {leftIcon && (
       <Image src={leftIcon} width={14} height={14} alt="left icon" />
     )}
-    {title}
+    {title || type}
     {rightIcon && (
       <Image src={rightIcon} width={14} height={14} alt="right icon" />
     )}
