@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { ProjectInterface } from "@/common.types";
 import Categories from "@/components/Categories/Categories";
-// import LoadMore from "@/components/LoadMore/LoadMore";
-// import ProjectCard from "@/components/ProjectCard/ProjectCard";
-// import { fetchAllProjects } from "@/lib/actions";
+import LoadMore from "@/components/LoadMore/LoadMore";
+import ProjectCard from "@/components/ProjectCard/ProjectCard";
+import { fetchAllProjects } from "@/lib/actions";
 
 interface ISearchParams {
   category?: string | null;
@@ -33,9 +33,10 @@ export const revalidate = 0;
 const Home: FC<IHomeProps> = async ({
   searchParams: { category, endcursor },
 }) => {
-  // const data = (await fetchAllProjects(category, endcursor)) as ProjectSearch;
+  const data = (await fetchAllProjects(category, endcursor)) as ProjectSearch;
 
-  const projectsToDisplay = [] as any[];
+  const projectsToDisplay = data?.projectSearch?.edges || [];
+  const pagination = data?.projectSearch?.pageInfo;
 
   if (projectsToDisplay.length === 0) {
     return (
@@ -54,7 +55,7 @@ const Home: FC<IHomeProps> = async ({
       <Categories />
 
       <section className="projects-grid">
-        {/* {projectsToDisplay.map(({ node }: { node: ProjectInterface }) => (
+        {projectsToDisplay.map(({ node }: { node: ProjectInterface }) => (
           <ProjectCard
             key={`${node?.id}`}
             id={node?.id}
@@ -64,7 +65,7 @@ const Home: FC<IHomeProps> = async ({
             avatarUrl={node?.createdBy.avatarUrl}
             userId={node?.createdBy.id}
           />
-        ))} */}
+        ))}
       </section>
 
       {/* <LoadMore

@@ -94,13 +94,14 @@ export const createNewProject = async (
     return makeGraphQLRequest(createProjectMutation, variables);
   }
 };
-// export const fetchAllProjects = async (
-//   category?: string | null,
-//   endCursor?: string | null
-// ) => {
-//   client.setHeader("x-api-key", apiKey);
-//   return makeGraphQLRequest(projectsQuery, { category, endCursor });
-// };
+export const fetchAllProjects = async (
+  category?: string | null,
+  endCursor?: string | null,
+  id?: string
+) => {
+  client.setHeader("x-api-key", apiKey);
+  return makeGraphQLRequest(getProjectByIdQuery, { id });
+};
 
 export const getProjectDetails = (id: string) => {
   client.setHeader("x-api-key", apiKey);
