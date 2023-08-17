@@ -33,10 +33,9 @@ export const revalidate = 0;
 const Home: FC<IHomeProps> = async ({
   searchParams: { category, endcursor },
 }) => {
-  const data = (await fetchAllProjects(category, endcursor)) as ProjectSearch;
+  // const data = (await fetchAllProjects(category, endcursor)) as ProjectSearch;
 
-  const projectsToDisplay = data?.projectSearch?.edges || [];
-  const pagination = data?.projectSearch?.pageInfo;
+  const projectsToDisplay = [] as any[];
 
   if (projectsToDisplay.length === 0) {
     return (
@@ -55,7 +54,7 @@ const Home: FC<IHomeProps> = async ({
       <Categories />
 
       <section className="projects-grid">
-        {projectsToDisplay.map(({ node }: { node: ProjectInterface }) => (
+        {/* {projectsToDisplay.map(({ node }: { node: ProjectInterface }) => (
           <ProjectCard
             key={`${node?.id}`}
             id={node?.id}
@@ -65,7 +64,7 @@ const Home: FC<IHomeProps> = async ({
             avatarUrl={node?.createdBy.avatarUrl}
             userId={node?.createdBy.id}
           />
-        ))}
+        ))} */}
       </section>
 
       {/* <LoadMore
