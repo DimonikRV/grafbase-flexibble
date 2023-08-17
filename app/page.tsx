@@ -3,7 +3,7 @@ import { ProjectInterface } from "@/common.types";
 import Categories from "@/components/Categories/Categories";
 // import LoadMore from "@/components/LoadMore/LoadMore";
 import ProjectCard from "@/components/ProjectCard/ProjectCard";
-import { fetchAllProjects } from "@/lib/actions";
+// import { fetchAllProjects } from "@/lib/actions";
 
 interface ISearchParams {
   category?: string | null;
