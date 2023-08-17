@@ -7,7 +7,7 @@ import { fetchAllProjects } from "@/lib/actions";
 
 interface ISearchParams {
   category?: string | null;
-  endCursor?: string | null;
+  endcursor?: string | null;
 }
 
 interface IHomeProps {
@@ -31,11 +31,11 @@ export const dynamicParams = true;
 export const revalidate = 0;
 
 const Home: FC<IHomeProps> = async ({
-  searchParams: { category, endCursor },
+  searchParams: { category, endcursor },
 }) => {
   const data = (await fetchAllProjects(
     category as string,
-    endCursor as string
+    endcursor as string
   )) as ProjectSearch;
 
   const projectsToDisplay = data?.projectSearch?.edges || [];
