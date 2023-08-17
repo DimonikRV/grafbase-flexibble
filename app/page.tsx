@@ -21,7 +21,7 @@ type ProjectSearch = {
       hasPreviousPage: boolean;
       hasNextPage: boolean;
       startCursor: string;
-      endCursor: string;
+      endcursor: string;
     };
   };
 };
@@ -33,7 +33,7 @@ export const revalidate = 0;
 const Home: FC<IHomeProps> = async ({
   searchParams: { category, endcursor },
 }) => {
-  const data = (await fetchAllProjects("category")) as ProjectSearch;
+  const data = (await fetchAllProjects(category, endcursor)) as ProjectSearch;
 
   const projectsToDisplay = data?.projectSearch?.edges || [];
   const pagination = data?.projectSearch?.pageInfo;
@@ -68,12 +68,12 @@ const Home: FC<IHomeProps> = async ({
         ))}
       </section>
 
-      {/* <LoadMore
+      <LoadMore
         startCursor={pagination?.startCursor}
-        endCursor={pagination?.endCursor}
+        endCursor={pagination?.endcursor}
         hasPreviousPage={pagination?.hasPreviousPage}
         hasNextPage={pagination?.hasNextPage}
-      /> */}
+      />
     </section>
   );
 };

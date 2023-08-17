@@ -89,7 +89,6 @@ export const authOptions: NextAuthOptions = {
         }
         return true;
       } catch (error: any) {
-        // redirect("/");
         return false;
       }
     },
