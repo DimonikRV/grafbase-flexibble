@@ -2,7 +2,7 @@ import { ProjectForm } from "@/common.types";
 import {
   createUserMutation,
   getUserQuery,
-  // projectsQuery,
+  projectsQuery,
   createProjectMutation,
   getProjectByIdQuery,
   getProjectsOfUserQuery,
@@ -94,12 +94,13 @@ export const createNewProject = async (
     return makeGraphQLRequest(createProjectMutation, variables);
   }
 };
-export const fetchAllProjects = async (
+export const fetchAllProjects = (
   category?: string | null,
   endcursor?: string | null
 ) => {
   client.setHeader("x-api-key", apiKey);
-  return makeGraphQLRequest(getProjectByIdQuery, { category, endcursor });
+
+  return makeGraphQLRequest(projectsQuery, { category, endcursor });
 };
 
 export const getProjectDetails = (id: string) => {

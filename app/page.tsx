@@ -1,18 +1,17 @@
-import { FC } from "react";
 import { ProjectInterface } from "@/common.types";
 import Categories from "@/components/Categories/Categories";
 import LoadMore from "@/components/LoadMore/LoadMore";
 import ProjectCard from "@/components/ProjectCard/ProjectCard";
 import { fetchAllProjects } from "@/lib/actions";
 
-interface ISearchParams {
+type SearchParams = {
   category?: string | null;
   endcursor?: string | null;
-}
+};
 
-interface IHomeProps {
-  searchParams: ISearchParams;
-}
+type Props = {
+  searchParams: SearchParams;
+};
 
 type ProjectSearch = {
   projectSearch: {
@@ -21,7 +20,7 @@ type ProjectSearch = {
       hasPreviousPage: boolean;
       hasNextPage: boolean;
       startCursor: string;
-      endcursor: string;
+      endCursor: string;
     };
   };
 };
@@ -30,13 +29,10 @@ export const dynamic = "force-dynamic";
 export const dynamicParams = true;
 export const revalidate = 0;
 
-const Home: FC<IHomeProps> = async ({
-  searchParams: { category, endcursor },
-}) => {
+const Home = async ({ searchParams: { category, endcursor } }: Props) => {
   const data = (await fetchAllProjects(category, endcursor)) as ProjectSearch;
 
   const projectsToDisplay = data?.projectSearch?.edges || [];
-  const pagination = data?.projectSearch?.pageInfo;
 
   if (projectsToDisplay.length === 0) {
     return (
@@ -69,10 +65,10 @@ const Home: FC<IHomeProps> = async ({
       </section>
 
       <LoadMore
-        startCursor={pagination?.startCursor}
-        endCursor={pagination?.endcursor}
-        hasPreviousPage={pagination?.hasPreviousPage}
-        hasNextPage={pagination?.hasNextPage}
+        startCursor={data?.projectSearch?.pageInfo?.startCursor}
+        endCursor={data?.projectSearch?.pageInfo?.endCursor}
+        hasPreviousPage={data?.projectSearch?.pageInfo?.hasPreviousPage}
+        hasNextPage={data?.projectSearch?.pageInfo.hasNextPage}
       />
     </section>
   );
