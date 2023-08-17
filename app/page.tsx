@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { ProjectInterface } from "@/common.types";
 import Categories from "@/components/Categories/Categories";
-import LoadMore from "@/components/LoadMore/LoadMore";
+// import LoadMore from "@/components/LoadMore/LoadMore";
 import ProjectCard from "@/components/ProjectCard/ProjectCard";
 import { fetchAllProjects } from "@/lib/actions";
 
@@ -68,12 +68,12 @@ const Home: FC<IHomeProps> = async ({
         ))}
       </section>
 
-      <LoadMore
+      {/* <LoadMore
         startCursor={pagination?.startCursor}
         endCursor={pagination?.endCursor}
         hasPreviousPage={pagination?.hasPreviousPage}
         hasNextPage={pagination?.hasNextPage}
-      />
+      /> */}
     </section>
   );
 };
