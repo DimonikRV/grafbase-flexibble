@@ -2,7 +2,7 @@ import { FC } from "react";
 import { ProjectInterface } from "@/common.types";
 import Categories from "@/components/Categories/Categories";
 // import LoadMore from "@/components/LoadMore/LoadMore";
-import ProjectCard from "@/components/ProjectCard/ProjectCard";
+// import ProjectCard from "@/components/ProjectCard/ProjectCard";
 // import { fetchAllProjects } from "@/lib/actions";
 
 interface ISearchParams {
