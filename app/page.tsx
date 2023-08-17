@@ -33,7 +33,7 @@ export const revalidate = 0;
 const Home: FC<IHomeProps> = async ({
   searchParams: { category, endcursor },
 }) => {
-  const data = (await fetchAllProjects(category, endcursor)) as ProjectSearch;
+  const data = (await fetchAllProjects("category")) as ProjectSearch;
 
   const projectsToDisplay = data?.projectSearch?.edges || [];
   const pagination = data?.projectSearch?.pageInfo;
