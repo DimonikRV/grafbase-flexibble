@@ -34,8 +34,6 @@ const Home: FC<IHomeProps> = async ({
   searchParams: { category, endcursor },
 }) => {
   const data = (await fetchAllProjects(category, endcursor)) as ProjectSearch;
-  console.log(data);
-  // console.log(data.projectSearch.edges);
 
   const projectsToDisplay = data?.projectSearch?.edges || [];
   const pagination = data?.projectSearch?.pageInfo;
