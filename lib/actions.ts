@@ -12,14 +12,18 @@ import {
 import { GraphQLClient } from "graphql-request";
 import { isBase64DataURL } from "../utils";
 
-const apiUrl = process.env.NEXT_PUBLIC_GRAFBASE_API_URL!;
-const apiKey = process.env.NEXT_PUBLIC_GRAFBASE_API_KEY!;
+const isProduction = process.env.NODE_ENV === "production";
 
-const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL!;
+const apiUrl = isProduction
+  ? process.env.NEXT_PUBLIC_GRAFBASE_API_URL || ""
+  : "http://127.0.0.1:4000/graphql";
 
-console.log(apiUrl);
-console.log(apiKey);
-console.log(serverUrl);
+const apiKey = isProduction
+  ? process.env.NEXT_PUBLIC_GRAFBASE_API_KEY || ""
+  : "letmein";
+const serverUrl = isProduction
+  ? process.env.NEXT_PUBLIC_SERVER_URL
+  : "http://localhost:3000";
 
 const client = new GraphQLClient(apiUrl);
 
