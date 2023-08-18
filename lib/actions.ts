@@ -2,7 +2,7 @@ import { ProjectForm } from "@/common.types";
 import {
   createUserMutation,
   getUserQuery,
-  projectsQuery,
+  // projectsQuery,
   createProjectMutation,
   getProjectByIdQuery,
   getProjectsOfUserQuery,
@@ -24,8 +24,6 @@ const apiKey = isProduction
 const serverUrl = isProduction
   ? process.env.NEXT_PUBLIC_SERVER_URL
   : "http://localhost:3000";
-
-console.log(apiUrl);
 
 const client = new GraphQLClient(apiUrl);
 
@@ -96,14 +94,14 @@ export const createNewProject = async (
     return makeGraphQLRequest(createProjectMutation, variables);
   }
 };
-export const fetchAllProjects = (
-  category?: string | null,
-  endCursor?: string | null
-) => {
-  client.setHeader("x-api-key", apiKey);
+// export const fetchAllProjects = (
+//   category?: string | null,
+//   endCursor?: string | null
+// ) => {
+//   client.setHeader("x-api-key", apiKey);
 
-  return makeGraphQLRequest(projectsQuery, { category, endCursor });
-};
+//   return makeGraphQLRequest(projectsQuery, { category, endCursor });
+// };
 
 export const getProjectDetails = (id: string) => {
   client.setHeader("x-api-key", apiKey);
