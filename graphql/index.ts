@@ -57,12 +57,6 @@ export const createUserMutation = `
 export const projectsQuery = `
   query getProjects($category: String, $endCursor: String) {
     projectSearch(filter: {category: {eq: $category}}) {
-      pageInfo {
-        hasNextPage
-        hasPreviousPage
-        startCursor
-        endCursor
-      }
       edges {
         node {
           title
