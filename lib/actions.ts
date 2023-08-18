@@ -12,18 +12,10 @@ import {
 import { GraphQLClient } from "graphql-request";
 import { isBase64DataURL } from "../utils";
 
-const isProduction = process.env.NODE_ENV === "production";
+const apiUrl = process.env.NEXT_PUBLIC_GRAFBASE_API_URL!;
+const apiKey = process.env.NEXT_PUBLIC_GRAFBASE_API_KEY!;
 
-const apiUrl = isProduction
-  ? process.env.NEXT_PUBLIC_GRAFBASE_API_URL || ""
-  : "http://127.0.0.1:4000/graphql";
-
-const apiKey = isProduction
-  ? process.env.NEXT_PUBLIC_GRAFBASE_API_KEY || ""
-  : "letmein";
-const serverUrl = isProduction
-  ? process.env.NEXT_PUBLIC_SERVER_URL
-  : "http://localhost:3000";
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL!;
 
 const client = new GraphQLClient(apiUrl);
 
@@ -100,7 +92,7 @@ export const fetchAllProjects = (
 ) => {
   client.setHeader("x-api-key", apiKey);
 
-  return makeGraphQLRequest(projectsQuery, { category });
+  return makeGraphQLRequest(projectsQuery, { category, endCursor });
 };
 
 export const getProjectDetails = (id: string) => {
