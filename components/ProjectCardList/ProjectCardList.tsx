@@ -1,34 +1,24 @@
 import { FC } from "react";
 import ProjectCard from "@/components/ProjectCard/ProjectCard";
-import LoadMore from "@/components/LoadMore/LoadMore";
+// import LoadMore from "@/components/LoadMore/LoadMore";
 import { fetchAllProjects } from "@/lib/actions";
 import { ProjectInterface } from "@/common.types";
 
 interface ISearchParams {
   category?: string | null;
-  endcursor?: string | null;
 }
 
 type ProjectSearch = {
   projectSearch: {
     edges: { node: ProjectInterface }[];
-    pageInfo: {
-      hasPreviousPage: boolean;
-      hasNextPage: boolean;
-      startCursor: string;
-      endCursor: string;
-    };
   };
 };
 
-export const ProjectCardList: FC<ISearchParams> = async ({
-  category,
-  endcursor,
-}) => {
-  const data = (await fetchAllProjects(category, endcursor)) as ProjectSearch;
+export const ProjectCardList: FC<ISearchParams> = async ({ category }) => {
+  const data = (await fetchAllProjects(category)) as ProjectSearch;
 
   const projectsToDisplay = data?.projectSearch?.edges || [];
-  const pagination = data?.projectSearch?.pageInfo;
+  //   const pagination = data?.projectSearch?.pageInfo;
   return (
     <section className="projects-grid">
       {projectsToDisplay.map(({ node }: { node: ProjectInterface }) => (
@@ -42,12 +32,12 @@ export const ProjectCardList: FC<ISearchParams> = async ({
           userId={node?.createdBy.id}
         />
       ))}
-      <LoadMore
+      {/* <LoadMore
         startCursor={pagination.startCursor}
         endCursor={pagination.endCursor}
         hasPreviousPage={pagination.hasPreviousPage}
         hasNextPage={pagination.hasNextPage}
-      />
+      /> */}
     </section>
   );
 };

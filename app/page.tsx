@@ -10,21 +10,18 @@ export const revalidate = 0;
 
 interface ISearchParams {
   category?: string | null;
-  endcursor?: string | null;
 }
 
 interface IHomeProps {
   searchParams: ISearchParams;
 }
 
-const Home: FC<IHomeProps> = async ({
-  searchParams: { category, endcursor },
-}) => {
+const Home: FC<IHomeProps> = async ({ searchParams: { category } }) => {
   return (
     <section className="flexStart flex-col paddings mb-16">
       <Categories />
       <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <ProjectCardList category={category} endcursor={endcursor} />
+        <ProjectCardList category={category} />
       </ErrorBoundary>
     </section>
   );
