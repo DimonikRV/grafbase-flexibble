@@ -17,6 +17,10 @@ const apiKey = process.env.NEXT_PUBLIC_GRAFBASE_API_KEY!;
 
 const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL!;
 
+console.log(apiUrl);
+console.log(apiKey);
+console.log(serverUrl);
+
 const client = new GraphQLClient(apiUrl);
 
 const makeGraphQLRequest = async (query: string, variables = {}) => {
