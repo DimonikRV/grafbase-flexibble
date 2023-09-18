@@ -5,7 +5,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 First, run the development server:
 
 ```bash
-before run start grafbase dev server
+before run, start grafbase dev server
 npx grafbase@0.24 dev
 #
 npm run dev
