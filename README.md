@@ -13,6 +13,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 First, run the development server:
 
 ```bash
+for instal dependencies
+npm i
+#
 before run, start grafbase dev server
 npx grafbase@0.24 dev
 #
