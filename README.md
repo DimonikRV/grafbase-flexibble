@@ -1,5 +1,14 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+# Flexibble fullstack App for projects collections.
+
+# [Link](https://cerulean-souffle-db258b.netlify.app/)
+## _Tech Stack:_
+
+[![N|Solid](https://img.shields.io/badge/Typescript-orange.svg?style=for-the-badge&logo=Typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![N|Solid](https://img.shields.io/badge/Tailwind-hotpink.svg?style=for-the-badge&logo=Tailwind&logoColor=white)](https://tailwindcss.com/)   [![N|Solid](https://img.shields.io/badge/next-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](https://nextjs.org/) [![N|Solid](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black)](https://webpack.js.org/) 
+[![N|Solid](https://img.shields.io/badge/grafbase-blueviolet.svg?style=for-the-badge&logo=Grafbase&logoColor=white)](https://grafbase.com/) 
+
 ## Getting Started
 
 First, run the development server:
@@ -15,9 +24,15 @@ yarn dev
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+#### Building for source
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+For production release:
+
+```sh
+npm run build
+```
+
+#### Author: Dmytro Reva
+
 
