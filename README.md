@@ -2,7 +2,6 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 # Flexibble fullstack App for projects collections.
 
-# [Link](https://cerulean-souffle-db258b.netlify.app/)
 ## _Tech Stack:_
 
 [![N|Solid](https://img.shields.io/badge/Typescript-orange.svg?style=for-the-badge&logo=Typescript&logoColor=white)](https://www.typescriptlang.org/)
