@@ -28,12 +28,7 @@ pnpm dev
 
 
 #### Building for source
-
-For production release:
-
-```sh
-npm run build
-```
+App runs only in dev mode using grafbase dev server: npx grafbase@0.24 dev. 
 
 #### Author: Dmytro Reva
 
