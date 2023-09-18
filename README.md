@@ -5,7 +5,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## _Tech Stack:_
 
 [![N|Solid](https://img.shields.io/badge/Typescript-orange.svg?style=for-the-badge&logo=Typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![N|Solid](https://img.shields.io/badge/Tailwind-hotpink.svg?style=for-the-badge&logo=Tailwind&logoColor=white)](https://tailwindcss.com/)   [![N|Solid](https://img.shields.io/badge/next-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](https://nextjs.org/)
+[![N|Solid](https://img.shields.io/badge/Tailwind-hotpink.svg?style=for-the-badge&logo=Tailwind&logoColor=white)](https://tailwindcss.com/)   [![N|Solid](https://img.shields.io/badge/next-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](https://nextjs.org/) [![N|Solid](https://img.shields.io/badge/next-auth-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](https://next-auth.js.org/) [![N|Solid](https://img.shields.io/badge/cloudinary-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black)](https://cloudinary.com/) 
 [![N|Solid](https://img.shields.io/badge/grafbase-blueviolet.svg?style=for-the-badge&logo=Grafbase&logoColor=white)](https://grafbase.com/) 
 
 ## Getting Started
